@@ -1,19 +1,36 @@
-import React from 'react'
-import './nav.css'
-import { Link } from 'react-router-dom'
-
+import React from "react";
+import "./nav.css";
+import { Link } from "react-router-dom";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 function Nav() {
   return (
-  
     <div class="sidenav">
-      <Link to='medicalHistory'>MedicalHistory</Link>
-      <Link to="vaccination">Vaccination</Link>
-      <Link to="allergies">Allergies</Link>
-      <Link to="records">Records</Link>
-      <Link to="room">Room</Link>
-      <Link to="doctors">Doctors</Link>
+      <Link to="medicalHistory">
+        <DoubleArrowIcon />
+        MedicalHistory
+      </Link>
+      <Link to="vaccination">
+        <DoubleArrowIcon />
+        Vaccination
+      </Link>
+      <Link to="allergies">
+        <DoubleArrowIcon />
+        Allergies
+      </Link>
+      <Link to="records">
+        <DoubleArrowIcon />
+        Records
+      </Link>
+      <Link to="room">
+        <DoubleArrowIcon />
+        Room
+      </Link>
+      <Link to="doctors">
+        <DoubleArrowIcon />
+        Doctors
+      </Link>
     </div>
-  )
+  );
 }
 
-export default Nav
+export default Nav;
