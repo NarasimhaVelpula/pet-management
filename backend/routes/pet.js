@@ -9,13 +9,15 @@ const {
   updatePet,
   deletePet,
   updateRoom,
-  getPets
+  getPets,
+  getPet
 } = require("../controllers/Pet");
 const { createRecord, updateRecord } = require("../controllers/Record");
 const tokenValidation = require("./tokenValidation");
 
 router.post("/", tokenValidation, createPet);
 router.get("/", tokenValidation, getPets);
+router.get("/:id",tokenValidation,getPet);
 router.put("/", tokenValidation, updatePet);
 router.delete("/", tokenValidation, deletePet);
 router.post("/room", tokenValidation, updateRoom);

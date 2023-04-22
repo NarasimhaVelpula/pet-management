@@ -18,7 +18,7 @@ function Home() {
   return (
     <div>
       <Header />
-      {loading ? <>Loading....</> : <Outlet pets={pets} />}
+      {loading ? <>Loading....</> : <Outlet context={{pets}} />}
     </div>
   );
 }

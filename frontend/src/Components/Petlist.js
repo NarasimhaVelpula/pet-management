@@ -8,11 +8,12 @@ import Divider from "@mui/material/Divider";
 import InboxIcon from "@mui/icons-material/Inbox";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import { Avatar, ListItemAvatar } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-export default function PetList(props) {
-  console.log(props);
-  const pets = [];
+export default function PetList() {
+  
+  const {pets}=useOutletContext()
+  console.log(pets)
   const navigate = useNavigate();
   const handleListItemClick = (event, index) => {
     navigate(`/pet/${index}`);
@@ -36,24 +37,6 @@ export default function PetList(props) {
             <ListItemText primary={pet.medicalCondition} />
           </ListItemButton>
         ))}
-        <ListItemButton onClick={(event) => handleListItemClick(event, 0)}>
-          <ListItemAvatar>
-            <Avatar
-              alt="Remy Sharp"
-              src="https://media.istockphoto.com/id/1188690130/photo/angry-border-collie-dog-expression-face-isolated-on-white-background.jpg?s=612x612&w=is&k=20&c=JBHeFybW8F1a1mQuF5Zxd8DT8n7aYwTvsOcgeGFkyrw="
-            />
-          </ListItemAvatar>
-          <ListItemText primary="Kin" />
-        </ListItemButton>
-        <ListItemButton onClick={(event) => handleListItemClick(event, 1)}>
-          <ListItemAvatar>
-            <Avatar
-              alt="Remy Sharp"
-              src="https://media.istockphoto.com/id/1197275895/photo/close-up-attentive-border-collie-dog-with-ears-up-and-looking-up-isolated-on-white-background.jpg?s=612x612&w=is&k=20&c=cgSSEuEciBNasAop_681kSgtXgYDV2wDFCLqB7lzIxg="
-            />
-          </ListItemAvatar>
-          <ListItemText primary="Jim" />
-        </ListItemButton>
       </List>
     </Box>
   );

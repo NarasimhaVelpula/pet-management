@@ -20,6 +20,23 @@ const getPets = async (req, res) => {
   }
 };
 
+const getPet=async(req,res)=>{
+  try{
+    console.log("---------------Getting Pet with ID-------------")
+    const {id}=req.params
+    console.log("id",id)
+    const requiredPet= await Pet.findById(id)
+    console.log(requiredPet)
+      res.status(200).send(requiredPet)
+  }
+  catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send("Something Went wrong, Please Contact naninarasimha27@gmail.com");
+  }
+}
+
 const createPet = async (req, res) => {
   try {
     const { name, breed, medicalCondition } = req.body;
@@ -111,4 +128,4 @@ const updateRoom = async (req, res) => {
   }
 };
 
-module.exports = { createPet, updatePet, deletePet, updateRoom, getPets };
+module.exports = { createPet, updatePet, deletePet, updateRoom, getPets, getPet };
