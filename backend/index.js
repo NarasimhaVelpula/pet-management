@@ -11,6 +11,7 @@ const Owner=require('./routes/owner')
 const Pet=require('./routes/pet')
 
 app.use(cors())
+// app.use(express.bodyParser())
 app.use(express.json())
 app.use('/auth',Auth)
 app.use('/owner',Owner)

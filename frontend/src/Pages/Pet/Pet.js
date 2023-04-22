@@ -1,17 +1,18 @@
-import React from 'react'
-import Nav from './Nav'
-import { Outlet } from 'react-router-dom'
-import { Container } from '@mui/material'
+import React from "react";
+import Nav from "./Nav";
+import { Outlet } from "react-router-dom";
+import { Container } from "@mui/material";
+import "./Pet.css";
 
 function PET() {
   return (
-    <>
-    <Nav />
-    <Container>
-    <Outlet />
-    </Container>
-    </>
-  )
+    <div className="dashboard">
+      <Nav />
+      <Container className="content"className="content">
+        <Outlet />
+      </Container>
+    </div>
+  );
 }
 
-export default PET
+export default PET;
