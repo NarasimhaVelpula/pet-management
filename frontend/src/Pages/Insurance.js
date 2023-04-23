@@ -29,16 +29,18 @@ function Insurance() {
       })
   }, [])
   const handleChange = (key, value) => {
+    console.log("handleChange")
     setinsurance({ ...insurance, [key]: value })
   }
 
   const handleSubmit = () => {
     setLoading(true)
-    axios.post('owner/insurance')
+    axios.post('owner/insurance', insurance)
       .then(res => {
         const { data } = res
         setinsurance(data)
         setLoading(false)
+        window.location.reload(false)
       })
       .catch(err => {
         setLoading(false)
@@ -47,6 +49,7 @@ function Insurance() {
   }
   return (
     <>
+      {console.log(insurance)}
       {
         insurance ? <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
@@ -74,9 +77,10 @@ function Insurance() {
                       required
                       fullWidth
                       id="insuranceName"
+                      value={insurance.InsuranceName}
                       label="Insurance Name"
                       autoFocus
-                      onChange={(event) => { }}
+                      onChange={(event) => { handleChange("InsuranceName", event.target.value) }}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -85,10 +89,12 @@ function Insurance() {
                       fullWidth
                       name="insuranceDetails"
                       label="Insurance Details"
+                      value={insurance.InsuranceDetails}
                       type="text"
                       id="insuranceDetails"
                       autoComplete="insurance-details"
                       multiline
+                      onChange={(event) => { handleChange("InsuranceDetails", event.target.value) }}
                     />
                   </Grid>
 
@@ -100,6 +106,7 @@ function Insurance() {
                   fullWidth
                   variant="contained"
                   disabled={loading}
+                  onClick={handleSubmit}
                   sx={{ mt: 3, mb: 2 }}
                 >
                   Update
