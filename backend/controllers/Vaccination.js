@@ -23,11 +23,11 @@ const createVaccination = async (req, res) => {
 
 const updateVaccination = async (req, res) => {
   try {
-    const { vaccinationName, vaccinationDate, id } = req.body;
+    const { vacc_id, vaccinationName, vaccinationDate, id } = req.body;
     // { username } = req.verified;
     console.log("-------------Updating Vaccination for a Pet-------------------");
     const requiredPet = await Pet.findById(id);
-    const requiredVaccination = await requiredPet.vaccination.id(recordId);
+    const requiredVaccination = await requiredPet.vaccination.id(vacc_id);
     requiredVaccination.vaccinationName = vaccinationName;
     requiredVaccination.vaccinationDate = vaccinationDate;
     try {

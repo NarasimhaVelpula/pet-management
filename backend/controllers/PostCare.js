@@ -26,12 +26,12 @@ const createPostCare = async (req, res) => {
 
   const updatePostCare = async (req, res) => {
     try {
-        const { food, medicines} = req.body;
+        const { postCare_id,food, medicines,id} = req.body;
       // { username } = req.verified;
       console.log("-------------Updating PostCare History-------------------");
       const requiredPet = await pet.findById(id);
       const post_care = await requiredPet.postcare.id(
-        _id
+        postCare_id
       );
       post_care.food = food;
       post_care.medicines = medicines;
