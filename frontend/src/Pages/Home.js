@@ -19,7 +19,11 @@ function Home() {
       const { data } = payload;
       setPets(data);
       setLoading(false);
-    });
+    })
+      .catch(err => {
+        window.location.reload(false)
+      })
+      ;
   }, []);
   return (
     <div>

@@ -31,24 +31,25 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
-    const [errorMessage, seterrorMessage] = React.useState("")
-    const [loading,setLoading]=React.useState(false)
-    const navigate=useNavigate()
+  const [errorMessage, seterrorMessage] = React.useState("")
+  const [loading, setLoading] = React.useState(false)
+  const navigate = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true)
     const data = new FormData(event.currentTarget);
-      const username= data.get('username')
-      const password= data.get('password')
-    axios.post('auth/login',{username,password})
-    .then(res=>{
-        localStorage.setItem('authtoken',res.data.token)
-        navigate('/')
-    })
-    .catch(err=>{
+    const username = data.get('username')
+    const password = data.get('password')
+    axios.post('auth/login', { username, password })
+      .then(res => {
+        localStorage.setItem('authtoken', res.data.token)
+        setTimeout(() => { navigate("/") }, 1000)
+
+      })
+      .catch(err => {
         setLoading(false)
         seterrorMessage("usernot found or password is invalid")
-    })
+      })
   };
 
   return (
@@ -101,7 +102,7 @@ export default function Login() {
               Sign In
             </Button>
             <Grid container>
-              
+
               <Grid item>
                 <Link to="/signup">
                   {"Don't have an account? Sign Up"}
