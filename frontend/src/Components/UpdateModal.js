@@ -112,7 +112,7 @@ export default function TransitionsModal({ open, setOpen, mainObj, handleFinalSu
                     <>
                       <label>{obj.DisplayName}</label>
                       <DatePicker
-                        selected={finalPayload[obj.name]}
+                        selected={Date(finalPayload[obj.name])}
                         onChange={(value) => {
                           handleChange(obj.name, value.toISOString())
                         }}

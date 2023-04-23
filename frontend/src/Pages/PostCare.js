@@ -53,7 +53,7 @@ function PostCare() {
     <div>
       <Button variant="contained" onClick={handleOpen}>Add PostCare Details </Button>
       {
-        petPostCare.length !== 0 ? petPostCare.map(history => (<Card cardContent={history} petId={pet._id} endpoint="postcare" />)) : <div>No Data Available</div>
+        petPostCare.length !== 0 ? petPostCare.map(history => (<Card cardContent={history} petId={pet._id} endpoint="postcare" schema={schema} propertyID={{ "postCare_id": history._id }} />)) : <div>No Data Available</div>
       }
       <Modal
         open={open}

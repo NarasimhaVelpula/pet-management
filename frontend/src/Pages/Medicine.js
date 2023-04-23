@@ -59,7 +59,7 @@ function Medicine() {
     <div>
       <Button variant="contained" onClick={handleOpen}>Add Medicine</Button>
       {
-        petMedicine.length !== 0 ? petMedicine.map(history => (<Card cardContent={history}  petId={pet._id} endpoint="medicine" />)) : <div>No Data Available</div>
+        petMedicine.length !== 0 ? petMedicine.map(history => (<Card cardContent={history}  petId={pet._id} endpoint="medicine" schema={schema} propertyID={{ "medicine_id": history._id }} />)) : <div>No Data Available</div>
       }
       <Modal
         open={open}

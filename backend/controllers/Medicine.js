@@ -30,7 +30,7 @@ const updateMedicineData = async (req, res) => {
     const { medicine_id, name, quantity, price, id } = req.body;
     // { username } = req.verified;
     console.log("-------------Updating medical History-------------------");
-    const requiredPet = await Pet.findById(id);
+    const requiredPet = await pet.findById(id);
     const medicineHistory = await requiredPet.medicine.id(
       medicine_id
     );
