@@ -132,19 +132,18 @@ export default function PetList() {
           </div>
         ))}
       </List>
-        <Modal
-          open={open}
-          handleClose={handleClose}
-          handleSubmit={handleSubmit}
-          schema={schema}
-          errorMessage={errorMessage}
-          loading={loading}
-          setFinalPayload={setPayload}
-        />
-        {console.log("pet", pet)}
         <UpdateModal open={open1} setOpen={setOpen1} mainObj={pets[pet]} handleFinalSubmit={handleUpdateSubmit} schema={schema} />
       </> : <div>No Pets found</div>
       }
+      <Modal
+        open={open}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+        schema={schema}
+        errorMessage={errorMessage}
+        loading={loading}
+        setFinalPayload={setPayload}
+      />
     </Box>
   );
 }

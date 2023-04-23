@@ -28,6 +28,23 @@ function Insurance() {
         console.log(err)
       })
   }, [])
+  const handleChange = (key, value) => {
+    setinsurance({ ...insurance, [key]: value })
+  }
+
+  const handleSubmit = () => {
+    setLoading(true)
+    axios.post('owner/insurance')
+      .then(res => {
+        const { data } = res
+        setinsurance(data)
+        setLoading(false)
+      })
+      .catch(err => {
+        setLoading(false)
+        seterrorMessage("failed")
+      })
+  }
   return (
     <>
       {
@@ -52,56 +69,29 @@ function Insurance() {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <TextField
-                      autoComplete="given-name"
-                      name="username"
+                      autoComplete="insuranceName"
+                      name="insuranceName"
                       required
                       fullWidth
-                      id="username"
-                      label="User Name"
+                      id="insuranceName"
+                      label="Insurance Name"
                       autoFocus
+                      onChange={(event) => { }}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
                       required
                       fullWidth
-                      name="password"
-                      label="Password"
-                      type="password"
-                      id="password"
-                      autoComplete="new-password"
+                      name="insuranceDetails"
+                      label="Insurance Details"
+                      type="text"
+                      id="insuranceDetails"
+                      autoComplete="insurance-details"
+                      multiline
                     />
                   </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      id="name"
-                      label="Name"
-                      name="name"
-                      autoComplete="name"
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      id="mobile"
-                      label="Mobile"
-                      name="mobile"
-                      autoComplete="mobile"
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      id="address"
-                      label="Address"
-                      name="address"
-                      autoComplete="address"
-                    />
-                  </Grid>
+
 
                 </Grid>
                 <p style={{ color: 'red' }}>{errorMessage}</p>
