@@ -32,6 +32,15 @@ export default function PetList() {
     setOpen1(true)
   }
   const [finalPayload, setFinalPayload] = React.useState({})
+  const handleDelete = (id) => {
+    axios.delete('/pet', { data: { id } })
+      .then(res => {
+        window.location.reload(false)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
   const handleClose = () => {
     setOpen(false)
     seterrorMessage("")
@@ -128,6 +137,13 @@ export default function PetList() {
                   event.stopPropagation()
                   handleOpen1(ind)
                 }}>Update</Button>
+              <Button
+                variant="contained"
+                style={{ margin: '10px' }}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  handleDelete(pet._id)
+                }}>Delete</Button>
             </div>
           </div>
         ))}

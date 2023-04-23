@@ -15,7 +15,8 @@ import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 function Insurance() {
-  const [insurance, setinsurance] = React.useState(null)
+  const [insurance, setinsurance] = React.useState({})
+  const [initialLoading, setinitialLoading] = React.useState(false)
   const [errorMessage, seterrorMessage] = React.useState("")
   const [loading, setLoading] = React.useState(false)
   React.useEffect(() => {
@@ -23,6 +24,7 @@ function Insurance() {
       .then(res => {
         const { data } = res
         setinsurance(data)
+        setinitialLoading(true)
       })
       .catch(err => {
         console.log(err)
@@ -51,7 +53,7 @@ function Insurance() {
     <>
       {console.log(insurance)}
       {
-        insurance ? <ThemeProvider theme={theme}>
+        initialLoading ? <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
