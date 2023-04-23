@@ -49,8 +49,25 @@ const createPostCare = async (req, res) => {
       res.status(503).send("not a valid request");
     }
   };
+
+  const deletePostCare = async (req, res) => {
+    try {
+      const { id, medHisId } = req.body;
+      console.log("--------------Removing Pet Medical History-----------");
+      const requiredPet = await pet.findById(id);
+      requiredPet.postcare.pull(medHisId)
+      await requiredPet.save()
+      res.status(200).send("success");
+    } catch (err) {
+      console.log(err);
+      res
+        .status(500)
+        .send("Something Went wrong, Please Contact naninarasimha27@gmail.com");
+    }
+  }
   
   module.exports = {
     createPostCare,
     updatePostCare,
+    deletePostCare
   };

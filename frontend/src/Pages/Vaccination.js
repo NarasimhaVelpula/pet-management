@@ -66,7 +66,7 @@ function Vaccination() {
     <div>
       <Button variant="contained" onClick={handleOpen}>Add Vaccination</Button>
       {
-        petVaccination.length !== 0 ? petVaccination.map(vaccination => (<Card cardContent={vaccination} />)) : <div>No Data Available</div>
+        petVaccination.length !== 0 ? petVaccination.map(vaccination => (<Card cardContent={vaccination} petId={pet._id} endpoint="vaccination" />)) : <div>No Data Available</div>
       }
       <Modal
         open={open}

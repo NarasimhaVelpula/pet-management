@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { createAllergy, updateAllergy } = require("../controllers/Allergy");
+const { createAllergy, updateAllergy, deleteAllergies } = require("../controllers/Allergy");
 const {
   createMedicalHistory,
   updateMedicalHistory,
@@ -13,12 +13,12 @@ const {
   getPets,
   getPet
 } = require("../controllers/Pet");
-const { createRecord, updateRecord } = require("../controllers/Record");
-const { createVaccination, updateVaccination } = require("../controllers/Vaccination");
-const { createMedicine, updateMedicineData } = require("../controllers/Medicine");
-const { createRoom, updateRoom } = require("../controllers/Room");
-const { createPostCare, updatePostCare } = require("../controllers/PostCare");
-const { createBill, updateBill } = require("../controllers/Bill");
+const { createRecord, updateRecord, deleteRecord } = require("../controllers/Record");
+const { createVaccination, updateVaccination, deleteVaccination } = require("../controllers/Vaccination");
+const { createMedicine, updateMedicineData,deleteMedicine } = require("../controllers/Medicine");
+const { createRoom, updateRoom, deleteRoom } = require("../controllers/Room");
+const { createPostCare, updatePostCare, deletePostCare } = require("../controllers/PostCare");
+const { createBill, updateBill, deleteBill } = require("../controllers/Bill");
 const tokenValidation = require("./tokenValidation");
 
 router.post("/", tokenValidation, createPet);
@@ -30,6 +30,13 @@ router.put("/room", tokenValidation, updateRoom);
 router.post("/room", tokenValidation, createRoom);
 router.post("/medicalHistory", tokenValidation, createMedicalHistory);
 router.delete('/medicalHistory', tokenValidation, deleteMedicalHistory)
+router.delete('/allergy', tokenValidation, deleteAllergies)
+router.delete('/bill',tokenValidation, deleteBill)
+router.delete('/medicine',tokenValidation, deleteMedicine)
+router.delete('/postcare', tokenValidation, deletePostCare)
+router.delete('/record', tokenValidation, deleteRecord)
+router.delete('/room', tokenValidation, deleteRoom)
+router.delete('/vaccination', tokenValidation, deleteVaccination)
 router.post("/medicine", tokenValidation, createMedicine);
 router.put("/medicine", tokenValidation, updateMedicineData);
 router.put("/medicalHistory", tokenValidation, updateMedicalHistory);

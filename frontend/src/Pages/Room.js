@@ -53,7 +53,7 @@ function RoomHistory() {
     <div>
       <Button variant="contained" onClick={handleOpen}>Add Room </Button>
       {
-        petRoomHistory.length !== 0 ? petRoomHistory.map(history => (<Card cardContent={history} />)) : <div>No Data Available</div>
+        petRoomHistory.length !== 0 ? petRoomHistory.map(history => (<Card cardContent={history} petId={pet._id} endpoint="room" />)) : <div>No Data Available</div>
       }
       <Modal
         open={open}

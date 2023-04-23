@@ -71,7 +71,7 @@ function Records() {
     <div>
       <Button variant="contained" onClick={handleOpen}>Add Record</Button>
       {
-        petRecords.length !== 0 ? petRecords.map(record => (<Card cardContent={record} />)) : <div>No Data Available</div>
+        petRecords.length !== 0 ? petRecords.map(record => (<Card cardContent={record} petId={pet._id} endpoint="record" />)) : <div>No Data Available</div>
       }
 
       <Modal
