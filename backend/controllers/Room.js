@@ -1,16 +1,16 @@
 const pet = require("../models/Pet")
 
-const createPostCare = async (req, res) => {
+const createRoom = async (req, res) => {
     try {
-      const {id, food, medicines} = req.body;
-      // { username } = req.verified;
-      console.log("-------------Creating PostCare data-------------------");
       console.log(req.body)
+      const { id, roomType, roomNo } = req.body;
+      // { username } = req.verified;
+      console.log("-------------Creating medical data-------------------");
       const requiredPet = await pet.findById(id);
-      await requiredPet.postcare.push({id,food, medicines});
+      await requiredPet.rooms.push({id, roomType, roomNo });
       try {
         const savedPet = await requiredPet.save();
-        res.status(200).send(savedPet.postcare);
+        res.status(200).send(savedPet.rooms);
       } catch (err) {
         console.log(err);
         res
@@ -24,20 +24,20 @@ const createPostCare = async (req, res) => {
   };
 
 
-  const updatePostCare = async (req, res) => {
+  const updateRoom = async (req, res) => {
     try {
-        const { food, medicines} = req.body;
+      const { roomType, roomNo } = req.body;
       // { username } = req.verified;
-      console.log("-------------Updating PostCare History-------------------");
+      console.log("-------------Updating medical History-------------------");
       const requiredPet = await pet.findById(id);
-      const post_care = await requiredPet.postcare.id(
+      const medicineHistory = await requiredPet.rooms.id(
         _id
       );
-      post_care.food = food;
-      post_care.medicines = medicines;
+      medicineHistory.roomNo = roomNo;
+      medicineHistory.roomType = roomType;
       try {
         const savedPet = await requiredPet.save();
-        res.status(200).send(savedPet.post_care);
+        res.status(200).send(savedPet.rooms);
       } catch (err) {
         console.log(err);
         res
@@ -51,6 +51,6 @@ const createPostCare = async (req, res) => {
   };
   
   module.exports = {
-    createPostCare,
-    updatePostCare,
+    createRoom,
+    updateRoom
   };

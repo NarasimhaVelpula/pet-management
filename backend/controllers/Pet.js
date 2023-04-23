@@ -111,7 +111,7 @@ const deletePet = async (req, res) => {
   }
 };
 
-const updateRoom = async (req, res) => {
+const updateRooms = async (req, res) => {
   try {
     const { id, roomNo, roomType } = req.body;
     console.log("----------Updating A Room-----------");
@@ -128,4 +128,4 @@ const updateRoom = async (req, res) => {
   }
 };
 
-module.exports = { createPet, updatePet, deletePet, updateRoom, getPets, getPet };
+module.exports = { createPet, updatePet, deletePet, updateRooms, getPets, getPet };

@@ -2,6 +2,7 @@ const Pet = require("../models/Pet");
 
 const createMedicalHistory = async (req, res) => {
   try {
+    console.log(req.body)
     const { id, doctorName, diagnosis } = req.body;
     // { username } = req.verified;
     console.log("-------------Creating medical History-------------------");

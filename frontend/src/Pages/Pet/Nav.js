@@ -9,6 +9,14 @@ function Nav() {
         <DoubleArrowIcon />
         MedicalHistory
       </Link>
+      <Link to="medicine">
+        <DoubleArrowIcon />
+        Medicine
+      </Link>
+      <Link to="postcare">
+        <DoubleArrowIcon />
+        Post Care
+      </Link>
       <Link to="vaccination">
         <DoubleArrowIcon />
         Vaccination
@@ -24,6 +32,10 @@ function Nav() {
       <Link to="room">
         <DoubleArrowIcon />
         Room
+      </Link>
+      <Link to="bill">
+        <DoubleArrowIcon />
+        Bill
       </Link>
     </div>
   );

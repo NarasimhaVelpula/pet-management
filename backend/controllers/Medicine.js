@@ -2,11 +2,13 @@ const pet = require("../models/Pet")
 
 const createMedicine = async (req, res) => {
     try {
-      const { medicine_id, name, quantity, price } = req.body;
+      console.log(req.body)
+      const { id, name, quantity, price } = req.body;
       // { username } = req.verified;
       console.log("-------------Creating medical data-------------------");
-      const requiredPet = await Pet.findById(id);
-      await requiredPet.medicine.push({medicine_id, name, quantity, price });
+      const requiredPet = await pet.findById(id);
+      console.log(requiredPet)
+      await requiredPet.medicine.push({id, name, quantity, price });
       try {
         const savedPet = await requiredPet.save();
         res.status(200).send(savedPet.medicine);

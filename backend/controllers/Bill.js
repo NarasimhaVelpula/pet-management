@@ -2,11 +2,11 @@ const pet = require("../models/Pet")
 
 const createBill = async (req, res) => {
     try {
-      const { bill_no, medicine_charges, room_charges, doc_charges} = req.body;
+      const {id, medicineCharges, roomCharges, docCharges} = req.body;
       // { username } = req.verified;
       console.log("-------------Creating PostCare data-------------------");
-      const requiredPet = await Pet.findById(id);
-      await requiredPet.bill.push({bill_no, medicine_charges, room_charges, doc_charges});
+      const requiredPet = await pet.findById(id);
+      await requiredPet.bill.push({id, medicineCharges, roomCharges, docCharges});
       try {
         const savedPet = await requiredPet.save();
         res.status(200).send(savedPet.bill);
@@ -23,18 +23,18 @@ const createBill = async (req, res) => {
   };
 
 
-  const updatePostCareCentre = async (req, res) => {
+  const updateBill = async (req, res) => {
     try {
-        const { bill_no, medicine_charges, room_charges, doc_charges} = req.body;
+      const {id, medicineCharges, roomCharges, docCharges} = req.body;
       // { username } = req.verified;
       console.log("-------------Updating PostCare History-------------------");
-      const requiredPet = await Pet.findById(id);
+      const requiredPet = await pet.findById(id);
       const bill = await requiredPet.bill.id(
-        bill_no
+        id
       );
-      bill.medicine_charges = medicine_charges;
-      bill.room_charges = room_charges;
-      bill.doc_charges = doc_charges;
+      bill.medicineCharges = medicineCharges;
+      bill.roomCharges = roomCharges;
+      bill.docCharges = docCharges;
       try {
         const savedPet = await requiredPet.save();
         res.status(200).send(savedPet.bill);
@@ -51,6 +51,6 @@ const createBill = async (req, res) => {
   };
   
   module.exports = {
-    createPostCare,
-    updatePostCareCentre,
+    createBill,
+    updateBill,
   };

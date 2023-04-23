@@ -31,6 +31,24 @@ const RoomSchema = mongoose.Schema({
   roomType: String,
 });
 
+const MedicineSchema = mongoose.Schema({
+  name: String,
+  quantity: String,
+  price: Number,
+});
+
+const PostCareSchema = mongoose.Schema({
+  food:String,
+  medicines:String,
+});
+
+const BillSchema = mongoose.Schema({
+  medicineCharges:String,
+  roomCharges:String,
+  docCharges:String,
+});
+
+
 const PetSchema = mongoose.Schema({
   name: {
     type: String,
@@ -49,6 +67,10 @@ const PetSchema = mongoose.Schema({
     type: [MedicalHistorySchema],
     default: [],
   },
+  medicine: {
+    type: [MedicineSchema],
+    default: []
+  },
   vaccination: {
     type: [VaccinationSchema],
     default: [],
@@ -61,10 +83,18 @@ const PetSchema = mongoose.Schema({
     type: [RecordSchema],
     default: [],
   },
-  room: {
-    type: RoomSchema,
-    default: {},
+  rooms: {
+    type: [RoomSchema],
+    default: [],
   },
+  postcare: {
+    type: [PostCareSchema],
+    default: [],
+  },
+  bill: {
+    type: [BillSchema],
+    default: [],
+  }
 });
 
 module.exports = mongoose.model("PET", PetSchema);
