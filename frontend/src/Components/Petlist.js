@@ -85,6 +85,7 @@ export default function PetList() {
         {pets.map((pet) => (
           <ListItemButton
             onClick={(event) => handleListItemClick(event, pet._id)}
+            style={{ border: "1px solid black", margin: "10px" }}
           >
             <ListItemAvatar>
               <Avatar
@@ -92,9 +93,11 @@ export default function PetList() {
                 src="https://media.istockphoto.com/id/1188690130/photo/angry-border-collie-dog-expression-face-isolated-on-white-background.jpg?s=612x612&w=is&k=20&c=JBHeFybW8F1a1mQuF5Zxd8DT8n7aYwTvsOcgeGFkyrw="
               />
             </ListItemAvatar>
-            <ListItemText primary={pet.name} />
-            <ListItemText primary={pet.breed} />
-            <ListItemText primary={pet.medicalCondition} />
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ display: "flex" }}>Name: <ListItemText primary={pet.name} style={{ marginLeft: "10px" }} /></div>
+              <div style={{ display: "flex" }}> Breed: <ListItemText primary={pet.breed} style={{ marginLeft: "10px" }} /></div>
+              <div style={{ display: "flex" }}> Medical Condition: <ListItemText primary={pet.medicalCondition} style={{ marginLeft: "10px" }} /></div>
+            </div>
           </ListItemButton>
         ))}
       </List>
