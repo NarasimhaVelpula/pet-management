@@ -25,10 +25,6 @@ function Nav() {
         <DoubleArrowIcon />
         Room
       </Link>
-      <Link to="doctors">
-        <DoubleArrowIcon />
-        Doctors
-      </Link>
     </div>
   );
 }

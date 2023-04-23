@@ -2,25 +2,85 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import { Avatar, ListItemAvatar } from "@mui/material";
+import { Avatar, Button, ListItemAvatar } from "@mui/material";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import axios from '../axios'
+
+
+import Modal from './../Components/Modal';
 
 export default function PetList() {
-  
-  const {pets}=useOutletContext()
+
+  const { pets } = useOutletContext()
   console.log(pets)
   const navigate = useNavigate();
   const handleListItemClick = (event, index) => {
     navigate(`/pet/${index}`);
   };
 
+  const [errorMessage, seterrorMessage] = React.useState("")
+  const [loading, setLoading] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const [finalPayload, setFinalPayload] = React.useState({})
+  const handleClose = () => {
+    setOpen(false)
+    seterrorMessage("")
+  };
+
+  const schema = [
+    {
+      name: "name",
+      type: "text",
+      DisplayName: "PET NAME"
+    },
+    {
+      name: "breed",
+      type: "text",
+      DisplayName: "Breed"
+    },
+    {
+      name: "medicalCondition",
+      type: "select",
+      DisplayName: "Medical Condition",
+      options: ["Diagnosed", "Undiagnosed"]
+    }
+
+  ]
+
+  const setPayload = (key, value) => {
+    console.log(key, value)
+    setFinalPayload({ ...finalPayload, [key]: value })
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true)
+    const data = new FormData(event.currentTarget);
+    const payload = {}
+    for (const key of data.keys()) {
+      console.log(key);
+    }
+    schema.map(obj => {
+      payload[obj.name] = data.get(obj.name)
+    })
+    console.log(payload)
+    setFinalPayload(...payload, ...finalPayload)
+    axios.post(`pet/`, { ...finalPayload })
+      .then(res => {
+        window.location.reload(false)
+      })
+      .catch(err => {
+        setLoading(false)
+        seterrorMessage("Failed to create")
+      })
+
+  }
+
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+      <Button variant="contained" onClick={handleOpen} sx={{ margin: 2 }}>Add Your PET</Button>
       <List component="nav" aria-label="main mailbox folders">
         {pets.map((pet) => (
           <ListItemButton
@@ -38,6 +98,15 @@ export default function PetList() {
           </ListItemButton>
         ))}
       </List>
+      <Modal
+        open={open}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+        schema={schema}
+        errorMessage={errorMessage}
+        loading={loading}
+        setFinalPayload={setPayload}
+      />
     </Box>
   );
 }
