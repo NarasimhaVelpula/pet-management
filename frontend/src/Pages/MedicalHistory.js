@@ -4,12 +4,14 @@ import { useOutletContext } from 'react-router-dom'
 import Card from '../Components/Card'
 
 function MedicalHistory() {
-  const {pet}=useOutletContext()
-  const petMedicalHistory=pet.MedicalHistory
+  const { pet } = useOutletContext()
+  const petMedicalHistory = pet.medicalHistory
   return (
     <div>
       <Button variant="contained">Add Medical History</Button>
-      <Card />
+      {
+        petMedicalHistory.length !== 0 ? petMedicalHistory.map(history => (<Card cardContent={history} />)) : <div>No Data Available</div>
+      }
     </div>
   )
 }
