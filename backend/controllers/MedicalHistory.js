@@ -49,7 +49,24 @@ const updateMedicalHistory = async (req, res) => {
   }
 };
 
+const deleteMedicalHistory = async (req, res) => {
+  try {
+    const { id, medHisId } = req.body;
+    console.log("--------------Removing Pet Medical History-----------");
+    const requiredPet = await Pet.findById(id);
+    requiredPet.medicalHistory.pull(medHisId)
+    await requiredPet.save()
+    res.status(200).send("success");
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .send("Something Went wrong, Please Contact naninarasimha27@gmail.com");
+  }
+}
+
 module.exports = {
   createMedicalHistory,
-  updateMedicalHistory
+  updateMedicalHistory,
+  deleteMedicalHistory
 };

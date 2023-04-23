@@ -3,6 +3,7 @@ const { createAllergy, updateAllergy } = require("../controllers/Allergy");
 const {
   createMedicalHistory,
   updateMedicalHistory,
+  deleteMedicalHistory,
 } = require("../controllers/MedicalHistory");
 const {
   createPet,
@@ -28,8 +29,9 @@ router.delete("/", tokenValidation, deletePet);
 router.put("/room", tokenValidation, updateRoom);
 router.post("/room", tokenValidation, createRoom);
 router.post("/medicalHistory", tokenValidation, createMedicalHistory);
+router.delete('/medicalHistory', tokenValidation, deleteMedicalHistory)
 router.post("/medicine", tokenValidation, createMedicine);
-router.put("/medicine", tokenValidation, updateMedicineData );
+router.put("/medicine", tokenValidation, updateMedicineData);
 router.put("/medicalHistory", tokenValidation, updateMedicalHistory);
 router.post("/allergy", tokenValidation, createAllergy);
 router.put("/allergy", tokenValidation, updateAllergy);

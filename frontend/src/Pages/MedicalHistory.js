@@ -47,13 +47,12 @@ function MedicalHistory() {
         setLoading(false)
         seterrorMessage("Failed to create")
       })
-
   }
   return (
     <div>
       <Button variant="contained" onClick={handleOpen}>Add Medical History</Button>
       {
-        petMedicalHistory.length !== 0 ? petMedicalHistory.map(history => (<Card cardContent={history} />)) : <div>No Data Available</div>
+        petMedicalHistory.length !== 0 ? petMedicalHistory.map(history => (<Card cardContent={history} petId={pet._id} endpoint="medicalHistory" />)) : <div>No Data Available</div>
       }
       <Modal
         open={open}

@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
+import axios from './../axios';
 
 const style = {
   position: 'absolute',
@@ -22,13 +23,25 @@ const style = {
 };
 
 
-export default function OutlinedCard({ cardContent, endpoint }) {
+export default function OutlinedCard(props) {
+  console.log(props)
+  const { cardContent, petId, endpoint } = props
   //console.log("cardContent", cardContent)
+  console.log("petId", petId)
   let headers = Object.keys(cardContent)
   console.log("headers", headers)
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleDelete = () => {
+    axios.delete(`pet/${endpoint}`, { data: { id: petId, medHisId: cardContent._id } })
+      .then(res => {
+        window.location.reload(false)
+      })
+      .catch(err => {
+        console.log("failed")
+      })
+  }
   return (
     <>
       <Box sx={{ minWidth: 275, maxWidth: 300, marginTop: 10 }}>
@@ -36,7 +49,7 @@ export default function OutlinedCard({ cardContent, endpoint }) {
           <CardContent>
             {
               headers.map(header => (<Typography sx={{ fontSize: 14 }} variant="h5" component="div" gutterBottom>
-                
+
                 {String(header).startsWith("_id") ? "" : header} {String(header).startsWith("_id") ? "" : ":"} {String(header).startsWith("_id") ? "" : String(cardContent[header])}
               </Typography>))
             }
@@ -44,6 +57,7 @@ export default function OutlinedCard({ cardContent, endpoint }) {
           </CardContent>
           <CardActions>
             <Button size="small" onClick={handleOpen}>Update</Button>
+            <Button size="small" onClick={handleDelete}>Delete</Button>
           </CardActions>
         </Card>
       </Box>
@@ -68,7 +82,7 @@ export default function OutlinedCard({ cardContent, endpoint }) {
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
               Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             </Typography>
-            
+
           </Box>
         </Fade>
       </Modal>
