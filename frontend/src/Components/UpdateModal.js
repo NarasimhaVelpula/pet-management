@@ -108,13 +108,15 @@ export default function TransitionsModal({ open, setOpen, mainObj, handleFinalSu
                 }
 
                 if (obj.type === "date") {
+                  //console.log("vacc_date", finalPayload[obj.name])
                   return (
                     <>
                       <label>{obj.DisplayName}</label>
                       <DatePicker
-                        selected={Date(finalPayload[obj.name])}
+                        selected={new Date(finalPayload[obj.name])}
+                        dateFormat="MM-dd-yyyy"
                         onChange={(value) => {
-                          handleChange(obj.name, value.toISOString())
+                          handleChange(obj.name, value)
                         }}
                       />
                     </>
