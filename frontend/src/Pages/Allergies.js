@@ -71,7 +71,7 @@ function Allergies() {
     <div>
       <Button variant="contained" onClick={handleOpen}>Add Allergy</Button>
       {
-        petAllergies.length !== 0 ? petAllergies.map(allergy => (<Card cardContent={allergy} petId={pet._id} endpoint="allergy" />)) : <div>No Data Available</div>
+        petAllergies.length !== 0 ? petAllergies.map(allergy => (<Card cardContent={allergy} petId={pet._id} endpoint="allergy" schema = {schema} propertyID={{ "allergyId": allergy._id }}  />)) : <div>No Data Available</div>
       }
       <Modal
         open={open}

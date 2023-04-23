@@ -26,12 +26,12 @@ const createRoom = async (req, res) => {
 
   const updateRoom = async (req, res) => {
     try {
-      const { roomType, roomNo } = req.body;
+      const { roomId, roomType, roomNo, id } = req.body;
       // { username } = req.verified;
       console.log("-------------Updating medical History-------------------");
       const requiredPet = await pet.findById(id);
       const medicineHistory = await requiredPet.rooms.id(
-        _id
+        roomId
       );
       medicineHistory.roomNo = roomNo;
       medicineHistory.roomType = roomType;

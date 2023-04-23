@@ -25,12 +25,12 @@ const createBill = async (req, res) => {
 
   const updateBill = async (req, res) => {
     try {
-      const {id, medicineCharges, roomCharges, docCharges} = req.body;
+      const {id, medicineCharges, roomCharges, docCharges, bill_no} = req.body;
       // { username } = req.verified;
       console.log("-------------Updating PostCare History-------------------");
       const requiredPet = await pet.findById(id);
       const bill = await requiredPet.bill.id(
-        id
+        bill_no
       );
       bill.medicineCharges = medicineCharges;
       bill.roomCharges = roomCharges;

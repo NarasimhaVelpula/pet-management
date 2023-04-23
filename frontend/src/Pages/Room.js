@@ -10,6 +10,7 @@ function RoomHistory() {
   const { pet } = useOutletContext()
   const [errorMessage, seterrorMessage] = React.useState("")
   const petRoomHistory = pet.rooms
+  //console.log("petroon  "+petRoomHistory)
   const [loading, setLoading] = React.useState(false)
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -53,7 +54,7 @@ function RoomHistory() {
     <div>
       <Button variant="contained" onClick={handleOpen}>Add Room </Button>
       {
-        petRoomHistory.length !== 0 ? petRoomHistory.map(history => (<Card cardContent={history} petId={pet._id} endpoint="room" />)) : <div>No Data Available</div>
+        petRoomHistory.length !== 0 ? petRoomHistory.map(history => (<Card cardContent={history} petId={pet._id} endpoint="room" schema={schema} propertyID={{ "roomId": history._id }}  />)) : <div>No Data Available</div>
       }
       <Modal
         open={open}

@@ -59,7 +59,7 @@ function Bill() {
     <div>
       <Button variant="contained" onClick={handleOpen}>Add Bills</Button>
       {
-        petBill.length !== 0 ? petBill.map(history => (<Card cardContent={history}  petId={pet._id} endpoint="bill" />)) : <div>No Data Available</div>
+        petBill.length !== 0 ? petBill.map(history => (<Card cardContent={history}  petId={pet._id} endpoint="bill" schema={schema} propertyID={{ "bill_no": history._id }}/>)) : <div>No Data Available</div>
       }
       <Modal
         open={open}
