@@ -45,6 +45,7 @@ function ResponsiveAppBar() {
   {
     name: "Insurance",
     handleFunction: () => {
+      navigation('/insurance')
       handleCloseUserMenu()
     }
   },

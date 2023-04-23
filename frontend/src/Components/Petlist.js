@@ -24,7 +24,7 @@ export default function PetList() {
   const [loading, setLoading] = React.useState(false)
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false)
-  const [pet, setPet] = React.useState(2)
+  const [pet, setPet] = React.useState(0)
   const handleOpen = () => setOpen(true);
   const handleOpen1 = (ind) => {
     console.log("ind", ind)
@@ -100,7 +100,7 @@ export default function PetList() {
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
       <Button variant="contained" onClick={handleOpen} sx={{ margin: 2 }}>Add Your PET</Button>
-      <List component="nav" aria-label="main mailbox folders">
+      {pets.length !== 0 ? <><List component="nav" aria-label="main mailbox folders">
         {pets.map((pet, ind) => (
           <div style={{ border: "1px solid black", margin: "10px" }}>
             <ListItemButton
@@ -132,17 +132,19 @@ export default function PetList() {
           </div>
         ))}
       </List>
-      <Modal
-        open={open}
-        handleClose={handleClose}
-        handleSubmit={handleSubmit}
-        schema={schema}
-        errorMessage={errorMessage}
-        loading={loading}
-        setFinalPayload={setPayload}
-      />
-      {console.log("pet", pet)}
-      <UpdateModal open={open1} setOpen={setOpen1} mainObj={pets[pet]} handleFinalSubmit={handleUpdateSubmit} schema={schema} />
+        <Modal
+          open={open}
+          handleClose={handleClose}
+          handleSubmit={handleSubmit}
+          schema={schema}
+          errorMessage={errorMessage}
+          loading={loading}
+          setFinalPayload={setPayload}
+        />
+        {console.log("pet", pet)}
+        <UpdateModal open={open1} setOpen={setOpen1} mainObj={pets[pet]} handleFinalSubmit={handleUpdateSubmit} schema={schema} />
+      </> : <div>No Pets found</div>
+      }
     </Box>
   );
 }

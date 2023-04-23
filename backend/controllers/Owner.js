@@ -26,6 +26,20 @@ const updateInsurance = async (req, res) => {
   }
 };
 
+const getInsurance = async (req, res) => {
+  try {
+    const { username } = req.verified;
+    console.log("-----------------Getting Insurance----------------");
+    const requiredOwner = await Owner.findOne({ username: username });
+    res.status(200).send(requiredOwner.insurance)
+  }
+  catch (err) {
+    console.log("Some parameter is missing");
+    console.log(err);
+    res.status(503).send("not a valid request");
+  }
+}
+
 const updateProfile = async (req, res) => {
   try {
     const { name, mobile, address } = req.body;
@@ -52,4 +66,4 @@ const updateProfile = async (req, res) => {
   }
 };
 
-module.exports = { updateInsurance, updateProfile };
+module.exports = { updateInsurance, updateProfile, getInsurance };

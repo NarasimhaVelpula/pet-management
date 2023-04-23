@@ -15,32 +15,34 @@ import Room from './Pages/Room'
 import Records from './Pages/Records';
 import PostCare from './Pages/PostCare';
 import Bill from './Pages/Bill';
+import Insurance from './Pages/Insurance';
 //import { Room } from '@mui/icons-material';
 
 function App() {
   return (
     <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            
-            <Route path="/" element={<Home />} >
-                <Route path="/" element={<PetList />} />
-                <Route path="pet/:petId" element={<Pet />} >
-                    <Route path="medicalHistory" element={<MedicalHistory />} />
-                    <Route path="medicine" element={<Medicine />} />
-                    <Route path="doctors" element={<Doctor />}/>
-                    <Route path="allergies" element={<Allergies />} />
-                    <Route path="records" element={<Records />} />
-                    <Route path="vaccination" element={<Vaccination />} />
-                    <Route path="room" element={<Room/>} />
-                    <Route path="postcare" element={<PostCare/>} />
-                    <Route path="bill" element={<Bill/>} />
-                  </Route>
-              </Route>
-          </Routes>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+
+          <Route path="/" element={<Home />} >
+            <Route path="/insurance" element={<Insurance />} />
+            <Route path="/" element={<PetList />} />
+            <Route path="pet/:petId" element={<Pet />} >
+              <Route path="medicalHistory" element={<MedicalHistory />} />
+              <Route path="medicine" element={<Medicine />} />
+              <Route path="doctors" element={<Doctor />} />
+              <Route path="allergies" element={<Allergies />} />
+              <Route path="records" element={<Records />} />
+              <Route path="vaccination" element={<Vaccination />} />
+              <Route path="room" element={<Room />} />
+              <Route path="postcare" element={<PostCare />} />
+              <Route path="bill" element={<Bill />} />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
