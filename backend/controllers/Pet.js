@@ -20,14 +20,14 @@ const getPets = async (req, res) => {
   }
 };
 
-const getPet=async(req,res)=>{
-  try{
+const getPet = async (req, res) => {
+  try {
     console.log("---------------Getting Pet with ID-------------")
-    const {id}=req.params
-    console.log("id",id)
-    const requiredPet= await Pet.findById(id)
+    const { id } = req.params
+    console.log("id", id)
+    const requiredPet = await Pet.findById(id)
     console.log(requiredPet)
-      res.status(200).send(requiredPet)
+    res.status(200).send(requiredPet)
   }
   catch (err) {
     console.log(err);
@@ -70,12 +70,13 @@ const createPet = async (req, res) => {
 
 const updatePet = async (req, res) => {
   try {
-    const { name, breed, id } = req.body;
+    const { name, breed, medicalCondition, id } = req.body;
     const { username } = req.verified;
     console.log("--------------Updating Pet-------------");
     const requiredPet = await Pet.findById(id);
     requiredPet.name = name;
     requiredPet.breed = breed;
+    requiredPet.medicalCondition = medicalCondition;
     try {
       const savedPet = await requiredPet.save();
       console.log(username + "updated pet with ID " + id);
