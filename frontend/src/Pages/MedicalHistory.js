@@ -52,7 +52,7 @@ function MedicalHistory() {
     <div>
       <Button variant="contained" onClick={handleOpen}>Add Medical History</Button>
       {
-        petMedicalHistory.length !== 0 ? petMedicalHistory.map(history => (<Card cardContent={history} petId={pet._id} endpoint="medicalHistory" />)) : <div>No Data Available</div>
+        petMedicalHistory.length !== 0 ? petMedicalHistory.map(history => (<Card cardContent={history} petId={pet._id} endpoint="medicalHistory" schema={schema} propertyID={{ "medHisId": history._id }} />)) : <div>No Data Available</div>
       }
       <Modal
         open={open}
@@ -62,7 +62,6 @@ function MedicalHistory() {
         errorMessage={errorMessage}
         loading={loading}
       >
-
       </Modal>
     </div>
   )

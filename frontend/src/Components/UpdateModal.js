@@ -147,7 +147,7 @@ export default function TransitionsModal({ open, setOpen, mainObj, handleFinalSu
               sx={{ mt: 3, mb: 2 }}
               disabled={loading}
             >
-              Create
+              Update
             </Button>
           </Box>
         </Box>

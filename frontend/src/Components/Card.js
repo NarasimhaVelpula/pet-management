@@ -5,34 +5,23 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Backdrop from '@mui/material/Backdrop';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
 import axios from './../axios';
+import UpdateModal from './UpdateModal'
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
 
 export default function OutlinedCard(props) {
   console.log(props)
-  const { cardContent, petId, endpoint } = props
+  const { cardContent, petId, endpoint, schema, propertyID } = props
   //console.log("cardContent", cardContent)
   console.log("petId", petId)
   let headers = Object.keys(cardContent)
   console.log("headers", headers)
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  //const handleClose = () => setOpen(false);
+  const [errorMessage, seterrorMessage] = React.useState("")
+  const [loading, setLoading] = React.useState(false)
   const handleDelete = () => {
     axios.delete(`pet/${endpoint}`, { data: { id: petId, medHisId: cardContent._id } })
       .then(res => {
@@ -40,6 +29,17 @@ export default function OutlinedCard(props) {
       })
       .catch(err => {
         console.log("failed")
+      })
+  }
+
+  const handleUpdate = (payload) => {
+    axios.put(`pet/${endpoint}`, { ...payload, id: petId, ...propertyID })
+      .then(res => {
+        window.location.reload(false)
+      })
+      .catch(err => {
+        setLoading(false)
+        seterrorMessage("Failed to create")
       })
   }
   return (
@@ -61,31 +61,7 @@ export default function OutlinedCard(props) {
           </CardActions>
         </Card>
       </Box>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-
-          </Box>
-        </Fade>
-      </Modal>
+      <UpdateModal open={open} setOpen={setOpen} mainObj={cardContent} handleFinalSubmit={handleUpdate} schema={schema} />
     </>
   );
 }
