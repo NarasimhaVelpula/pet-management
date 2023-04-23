@@ -66,8 +66,8 @@ export default function PetList() {
       payload[obj.name] = data.get(obj.name)
     })
     console.log(payload)
-    setFinalPayload(...payload, ...finalPayload)
-    axios.post(`pet/`, { ...finalPayload })
+    //setFinalPayload({ ...payload, ...finalPayload })
+    axios.post(`pet/`, { ...payload, ...finalPayload })
       .then(res => {
         window.location.reload(false)
       })
